@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+print("hello world")
+
+name = "Elvis Li"
+name2 = name
+
+print("My name is ",name)
+
+name = "PaoChe Ge"
+
+print(name,name2)
+

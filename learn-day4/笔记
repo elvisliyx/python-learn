@@ -1,0 +1,65 @@
+
+装饰器：
+    定义：本质是函数，（装饰其他函数）就是为其他函数添加附加功能。
+    原则：1、不能修改被装饰的函数的源代码。2、不能修改被装饰的函数的调用方式。
+
+实现装饰器只是储备：
+    1、函数即“变量”
+    2、高阶函数
+        a:把一个函数名当做实参传给另外一个函数(在不修改呗装饰函数源代码的情况下为其添加功能)
+        b:返回值中包含函数名(不修改函数的调用方式)
+    3、嵌套函数
+
+高阶函数+嵌套函数=》装饰器
+
+
+列表生成式
+    [ i*2 for i in range(10) ]
+    a = []
+    for i in range(10):
+        a.append(i*2)
+    a
+
+
+生成器
+    只有在调用时才会生成相应的数据，只记录当前位置，只有一个__next__()方法。next()
+    ( i*i for i in range(10) )
+
+  generator非常强大，如果推算的算法比较复杂，用类似列表生成式的for循环无法实现的时候，还可以用函数来实现。
+  比如，著名的斐波那契数列(Fibonacci)，除第一个和第二个数外，任意一个数都可以由前两个数相加得到：
+  1，1,2,3,5,8,13,21,34......
+  斐波那契数列用列表生成式写不出来，但是用函数把它打印出来却很容易。
+  def fib(max):
+    n,a,b = 0,0,1
+    while n < max:
+        #print(b)
+        yield b
+        a,b = b,a+b
+        n = n + 1
+    return 'done'
+  f = fib(100)
+  print(f.__next__())
+  print(f.__next__())
+  print(f.__next__())
+  for i in f:
+    print(i)
+
+  g = fib(6)
+  while True:
+    try:
+        x = next(g)
+        print('g:',x)
+    except StopIteration as e:
+        print('Generator return value:',e.value)
+        break
+
+  注意，赋值语句：
+  a,b = b,a+b
+  相当于：
+  t = (b,a+b) t是一个tuple
+  a = t[0]
+  b = t[1]
+
+
+
+
